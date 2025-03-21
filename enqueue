@@ -1,0 +1,17 @@
+#include <stdio.h>
+#define max 5
+int queue[max];//enqueue to max 5
+int front=-1,rear=-1;//define pointer position
+void enqueue(int value){
+	if(rear==max-1){
+		printf("queue is full\n");
+	}
+	else{
+		if(front==-1)front=0;//set front to 0
+			queue[++rear]=value;//shift pointer to 1
+	     printf("%d is enqueued\n", value)
+	}
+}
+int main(){
+	enqueue(20);
+}
