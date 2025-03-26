@@ -1,17 +1,51 @@
 #include <stdio.h>
-#define max 5
-int queue[max];//enqueue to max 5
-int front=-1,rear=-1;//define pointer position
-void enqueue(int value){
-	if(rear==max-1){
-		printf("queue is full\n");
-	}
-	else{
-		if(front==-1)front=0;//set front to 0
-			queue[++rear]=value;//shift pointer to 1
-	     printf("%d is enqueued\n", value)
-	}
+#include <stdlib.h>
+
+#define SIZE 5
+int queue[SIZE], front = -1, rear = -1;
+
+void enqueue(int value) {
+    if (rear == SIZE - 1)
+        printf("Queue is Full\n");
+    else {
+        if (front == -1) front = 0;
+        queue[++rear] = value;
+        printf("Inserted: %d\n", value);
+    }
 }
-int main(){
-	enqueue(20);
+
+int dequeue() {
+    if (front == -1 || front > rear) {
+        printf("Queue is Empty\n");
+        return -1;
+    }
+    return queue[front++];
 }
+
+void display() {
+    if (front == -1 || front > rear) {
+        printf("Queue is Empty\n");
+        return;
+    }
+    printf("Queue: ");
+    int i;
+    for (i = front; i <= rear; i++)
+        printf("%d ", queue[i]);
+    printf("\n");
+}
+
+int main() {
+    int choice, value;
+    while (1) {
+        printf("\n1.Enqueue 2.Dequeue 3.Display 4.Exit\nEnter choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1: printf("Enter value: "); scanf("%d", &value); enqueue(value); break;
+            case 2: printf("Dequeued: %d\n", dequeue()); break;
+            case 3: display(); break;
+            case 4: exit(0);
+            default: printf("Invalid choice\n");
+        }
+    }
+}
+
